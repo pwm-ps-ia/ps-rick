@@ -1,11 +1,15 @@
 version: "3"
 services:
   api: &api_ps
+    restart: always
     build: .
     ports:
       - 8000:8000
     depends_on:
       - redis
+    volumes:
+      - .:/code
+    command: gunicorn backend.wsgi:application -w 2 -b :8000 --reload
   redis:
     image: redis:alpine
 volumes:

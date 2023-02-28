@@ -3,9 +3,8 @@ FROM python:3.10
 RUN apt-get update -y
 RUN apt-get install cron -y
 
-WORKDIR /usr/src/config
-
-COPY Pipfile Pipfile.lock ./
+RUN mkdir /code
+WORKDIR /code
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -15,10 +14,12 @@ RUN pip install -U gunicorn
 RUN pip install -U psycopg2
 RUN pip install -U python-crontab
 
-COPY . .
+COPY . /code/
+
 
 RUN pipenv install --system
 
-EXPOSE 8000
+RUN python3 manage.py migrate --no-input
+RUN python3 manage.py collectstatic --no-input
 
-CMD [ "python3", "manage.py",  "runserver", "0.0.0.0:8000"]
+EXPOSE 8000
