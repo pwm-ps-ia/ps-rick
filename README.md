@@ -24,10 +24,6 @@ First we are going to go inside containers shell
     docker exec -it container sh
 ```
 
-```
-    docker exec -it container sh
-```
-
 then we are going to make the migrations
 
 ```
