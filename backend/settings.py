@@ -27,9 +27,19 @@ SECRET_KEY = 'django-insecure--o5%o&i%@gc&+x^$4pkmp)b_1=*hem=_1(4vg_+cbg=8l1sxcp
 DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0']
+AUTH_USER_MODEL = "users.User"
 
 
 # Application definition
+
+SELF_APPS = [
+    "users",
+]
+
+THIRD_PARTY_APPS = [
+    'rest_framework.authtoken',
+    'rest_framework'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+] + SELF_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,3 +135,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": (
+        "rest_framework.renderers.BrowsableAPIRenderer",  # add this first.
+        "rest_framework.renderers.JSONRenderer",
+    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "PAGE_SIZE": 10,
+}
