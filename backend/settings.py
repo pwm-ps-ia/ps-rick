@@ -34,6 +34,8 @@ AUTH_USER_MODEL = "users.User"
 
 SELF_APPS = [
     "users",
+    "datasets",
+    "ia_models"
 ]
 
 THIRD_PARTY_APPS = [
