@@ -49,6 +49,11 @@ class User(AbstractUser):
     city = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
 
+    experience_with_ia=models.CharField(max_length=255, null=True, blank=True)
+    organization_type=models.CharField(max_length=3, null=True, blank=True)
+    organization=models.CharField(max_length=50, null=True, blank=True)
+    why_us=models.TextField(null=True, blank=True)
+
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
