@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.utils.translation import gettext_lazy as _
 from rest_framework.authtoken.models import Token
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class CustomUserManager(UserManager):
@@ -43,6 +44,10 @@ class CustomUserManager(UserManager):
 class User(AbstractUser):
     username = models.CharField(max_length=200, unique=False)
     email = models.EmailField(_("email address"), unique=True)
+    phone = PhoneNumberField()
+    born_date = models.DateField()
+    city = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
 
     objects = CustomUserManager()
 

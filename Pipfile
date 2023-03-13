@@ -11,6 +11,8 @@ celery = "*"
 pip = "*"
 djangorestframework-simplejwt = "*"
 django-filter = "*"
+django-phonenumber-field = "*"
+phonenumbers = "*"
 
 [dev-packages]
 
