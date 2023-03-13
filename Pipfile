@@ -8,6 +8,9 @@ django = "*"
 djangorestframework = "*"
 celery = "*"
 "backports.weakref" = "*"
+pip = "*"
+djangorestframework-simplejwt = "*"
+django-filter = "*"
 
 [dev-packages]
 

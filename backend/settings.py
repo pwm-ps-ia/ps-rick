@@ -35,12 +35,17 @@ AUTH_USER_MODEL = "users.User"
 SELF_APPS = [
     "users",
     "datasets",
-    "ia_models"
+    "ia_models",
+    "api.v1"
 ]
 
 THIRD_PARTY_APPS = [
+    'django_filters',
+    #rest api libraries
     'rest_framework.authtoken',
-    'rest_framework'
+    'rest_framework_simplejwt',
+    'rest_framework',
+    
 ]
 
 INSTALLED_APPS = [
@@ -144,6 +149,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.TokenAuthentication",
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
